@@ -33,6 +33,7 @@ public class FacadeTest {
     
     static Data data;
     static Facade instance;
+    static Factory factory;
     
     @Rule
     public ExpectedException exception = ExpectedException.none();
@@ -41,6 +42,7 @@ public class FacadeTest {
     public static void setUpClass() {
         instance = new Facade();
         data = new Data();
+        factory = new Factory();
     }
     
     @AfterClass
@@ -98,29 +100,28 @@ public class FacadeTest {
      * Test of addInvestment method, of class Facade.
      */
    @Test
-    public void testAddInvestment() {
+    public void test3AddInvestment() {
         System.out.println("addInvestment");
-        
+        for (int i = 1; i<3; i++){
+            instance.addInvestment(data.clientsData[i+1], data.accountsData[i+5], data.investmentsData[i]);
+            BankAccount accountFound = instance.searchBankAccount(factory.createBankAccount(data.accountsData[i+5]));
+            assertTrue(accountFound.hasInvestment());
+            assertEquals(accountFound.getInvestment(), data.investments[i-1]);
+        }
     }
 
     /**
      * Test of addTransaction method, of class Facade.
      */
-    /*@Test
-    public void testAddTransaction() {
+    @Test
+    public void test4AddTransaction() {
         System.out.println("addTransaction");
-        String[] dataSenderClient = null;
-        String[] dataSenderBA = null;
-        String[] dataReceiverClient = null;
-        String[] dataReceiverBA = null;
-        double amount = 0.0;
-        Facade instance = new Facade();
-        ArrayList<String> expResult = null;
-        ArrayList<String> result = instance.addTransaction(dataSenderClient, dataSenderBA, dataReceiverClient, dataReceiverBA, amount);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }*/
+        for (int i = 0; i<2; i++){
+            System.out.println(instance.addTransaction(data.clientsDataForBankAccounts[i], data.accountsData[i+6] , data.clientsDataForBankAccounts[i+1], data.accountsData[i+7], data.amountsForTransaction[i]));
+            Client clientFound = instance.searchClient(factory.createClient(data.clientsDataForBankAccounts[i]));
+            assertEquals(clientFound.getTransactios().get(i), data.transactions[i]);
+        }
+    }
 
     
 }
