@@ -12,6 +12,7 @@ package subBusinessTier;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.IllegalFormatCodePointException;
 import subBusinessTier.entities.BankAccount;
 import subBusinessTier.entities.Client;
 import subBusinessTier.entities.Investment;
@@ -19,6 +20,9 @@ import subBusinessTier.entities.SavingAccount;
 import subBusinessTier.entities.Transaction;
 
 public class Factory {
+    
+    public static int transactionNumber = 1;
+    public static int investmentNumber = 1;
     
     public Client createClient(String data[]){
         Client client = null;
@@ -34,6 +38,8 @@ public class Factory {
                 client.setPESEL(data[3]);
                 client.setPhoneNumber(data[4]);
                 break;
+            default: 
+                throw new IllegalFormatCodePointException(0);
         }
         return client;
     }
@@ -58,6 +64,8 @@ public class Factory {
                 bankAccount1.setInterest(Double.parseDouble(data[3]));
                 bankAccount = bankAccount1;
                 break;
+            default: 
+                throw new IllegalFormatCodePointException(0);
         }
         
         return bankAccount; 
@@ -65,6 +73,8 @@ public class Factory {
     
     public Transaction createTransaction(Client clientSender, Client clientReceiver, BankAccount bankAccountSender, BankAccount bankAccountReceiver, double amount){
         Transaction transaction = new Transaction();
+        transaction.setNumber(transactionNumber);
+        transactionNumber++;
         transaction.setSender(clientSender);
         transaction.setReceiver(clientReceiver);
         transaction.setSendersAccount(bankAccountSender);
@@ -75,6 +85,8 @@ public class Factory {
     
     public Investment createInvestment(String data[]){
         Investment investment = new Investment();
+        investment.setNumber(investmentNumber);
+        investmentNumber++;
         investment.setDateBeggining(LocalDate.parse(data[0]));
         investment.setDateEnd(LocalDate.parse(data[1]));
         investment.setInterest(Double.parseDouble(data[2]));

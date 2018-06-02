@@ -11,6 +11,28 @@ public class Investment {
     private double interest;
     private double amount;
     private BankAccount bankAccount;
+    private int number;
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
+    public Investment(int number, LocalDate dateBeggining, LocalDate dateEnd, double interest, double amount) {
+        this.dateBeggining = dateBeggining;
+        this.dateEnd = dateEnd;
+        this.interest = interest;
+        this.amount = amount;
+        this.number = number;
+    }
+
+    public Investment() {
+    }
+    
+    
     
     public LocalDate getDateBeggining() {
         return dateBeggining;
@@ -72,7 +94,7 @@ public class Investment {
     
     public boolean equals(Object obj){
         boolean result = false;
-        if(getBankAccount().equals(((Investment)obj).getBankAccount())){
+        if(getNumber() == ((Investment)obj).getNumber()){
             result = true;
         }
         return result;

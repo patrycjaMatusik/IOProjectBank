@@ -19,6 +19,16 @@ public class Client {
         bankAccounts = new ArrayList<>();
         transactions = new ArrayList<>();
     }
+
+    public Client(String name, String adress, String PESEL, String phoneNumber) {
+        this();
+        this.name = name;
+        this.PESEL = PESEL;
+        this.adress = adress;
+        this.phoneNumber = phoneNumber;
+    }
+    
+    
     
     public BankAccount searchAccount(BankAccount bankAccount){
         int idx;
@@ -50,6 +60,8 @@ public class Client {
                     Transaction transaction = factory.createTransaction(this, clientReceiver, bankAccountSender, bankAccountReceiver, amount);
                     transaction.setState(true);
                     transactions.add(transaction);
+                    bankAccountSender.substractAmount(amount);
+                    bankAccountReceiver.addAmount(amount);
                     bankAccountSender.addTransaction(transaction);
                 }
             }

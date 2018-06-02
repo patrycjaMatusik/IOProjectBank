@@ -14,6 +14,20 @@ public class BankAccount {
     public BankAccount(){
         transactions = new ArrayList<>();
     }
+
+    public BankAccount(int number, double balance) {
+        this();
+        this.number = number;
+        this.balance = balance;
+    }
+
+    public BankAccount(int number, double balance, Client client) {
+        this.number = number;
+        this.balance = balance;
+        this.client = client;
+    }
+    
+    
     
     public void addTransaction(Transaction transaction){
         transactions.add(transaction);

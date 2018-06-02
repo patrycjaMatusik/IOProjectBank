@@ -12,11 +12,32 @@ public class Transaction {
     private BankAccount receiversAccount;
     private Client sender;
     private Client receiver;
+    private int number;
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
     
     public Transaction(){
         date = LocalDate.now();
         state = false;
     }
+
+    public Transaction(int number, double amount, Client sender, Client receiver, BankAccount sendersAccount, BankAccount receiversAccount) {
+        this();
+        this.number = number;
+        this.amount = amount;
+        this.sendersAccount = sendersAccount;
+        this.receiversAccount = receiversAccount;
+        this.sender = sender;
+        this.receiver = receiver;
+    }
+    
+    
 
     public double getAmount() {
         return amount;
@@ -90,15 +111,9 @@ public class Transaction {
     @Override
     public boolean equals(Object obj){
         boolean result = false;
-        if(getSendersAccount().equals(((Transaction)obj).getSendersAccount())){
-            if(getReceiversAccount().equals(((Transaction)obj).getReceiversAccount())){
-                if(getDate().equals(((Transaction)obj).getDate())){
-                    if(getAmount() == ((Transaction)obj).getAmount()){
+        if(getNumber() == ((Transaction)obj).getNumber()){
                         result = true;
                     }
-                }
-            }
-        }
         return result;
     }
     
