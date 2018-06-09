@@ -29,7 +29,7 @@ public class Data {
     public Client[] clients1 = {new Client("Name1", "Address1","PESEL1", "758964523"), new Client("Name2", "Address2", "PESEL2", "965423586"), new Client("Name3", "Address3", "PESEL3", "758564523"), 
         new Client("Name4", "Address4", "PESEL4", "965423586"), new Client("Name5", "Address5", "PESEL5", "758966523"), new Client("Name6", "Address6", "PESEL6", "978423586")};
 
-    public String[][] accountsData = {{"1", "123456", "2256.25"}, {"1", "456789", "5785.35"}, {"1", "741852", "2658.23"}, {"2", "852963", "20000.00", "0.5"},
+    public String[][] accountsData = {{"1", "123456", "256.25"}, {"1", "456789", "5785.35"}, {"1", "741852", "2658.23"}, {"2", "852963", "20000.00", "0.5"},
     {"2", "965845", "25000.00", "0.5"}, {"2", "325478", "10000.00", "0.5"}, 
     
     {"0", "123456"}, {"0", "456789"}, {"0", "741852"}, 

@@ -101,6 +101,7 @@ public class BankAccount {
     public String toString(){
         String str = "\nNumber = " + getNumber();
         str += ", Client: " + getClient().toString();
+        str += "\nBalance: " + getBalance();
     return str;
     }
     

@@ -3,6 +3,7 @@ package subBusinessTier.entities;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import subBusinessTier.Facade;
 import subBusinessTier.Factory;
 
 public class Client {
@@ -48,7 +49,7 @@ public class Client {
         return transactions1;
     }
     
-    public ArrayList<String> addTransaction(String[] dataSenderBA, String[] dataReceiverBA, double amount, Client clientReceiver){
+    public String addTransaction(String[] dataSenderBA, String[] dataReceiverBA, double amount, Client clientReceiver){
         Factory factory = new Factory();
         BankAccount bankAccount = factory.createBankAccount(dataSenderBA);
         BankAccount bankAccountSender;
@@ -63,10 +64,16 @@ public class Client {
                     bankAccountSender.substractAmount(amount);
                     bankAccountReceiver.addAmount(amount);
                     bankAccountSender.addTransaction(transaction);
+                    return "tr_done";
+                }else{
+                    return "tr_failed_LackOfMoney";
                 }
+            }else{
+                return "tr_failed_WrongReceiverBANumber";
             }
+        }else{
+            return "tr_failed_WrongSenderBANumber";
         }
-        return gettransactions();
     }
     
     public String addInvestment(String[] dataBA, String[] dataInvestment){
@@ -77,10 +84,11 @@ public class Client {
             if(bankAccountFound.hasInvestment() == false){
             Investment investment = factory.createInvestment(dataInvestment);
             bankAccountFound.addInvestment(investment);
-            return investment.toString();
+            return "in_done";
             }
+            return "in_failed_InvestmentOnTheBA";
         }
-        return null;
+        return "in_failed_NoBA";
     }
 
     public String getName() {

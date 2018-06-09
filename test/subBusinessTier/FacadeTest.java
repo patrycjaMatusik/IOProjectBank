@@ -81,9 +81,9 @@ public class FacadeTest {
     public void test2AddBankAccount() {
         System.out.println("addBankAccount");
         for(int j = 0; j<3; j++){ //dla j<3 działa, dla 4 już nie, dlaczego????
-            System.out.println(instance.addBankAccount(data.clientsDataForBankAccounts[j], data.accountsData[j+6]));
+            instance.addBankAccount(data.clientsDataForBankAccounts[j], data.accountsData[j]);
             int number1 = instance.getBankAccounts().size();
-            instance.addBankAccount(data.clientsDataForBankAccounts[j], data.accountsData[j+6]);
+            instance.addBankAccount(data.clientsDataForBankAccounts[j], data.accountsData[j]);
             int number2 = instance.getBankAccounts().size();
             BankAccount result = instance.getBankAccounts().get(number2-1);
             assertEquals(data.accounts[number2-1], result);
@@ -117,9 +117,10 @@ public class FacadeTest {
     public void test4AddTransaction() {
         System.out.println("addTransaction");
         for (int i = 0; i<2; i++){
-            System.out.println(instance.addTransaction(data.clientsDataForBankAccounts[i], data.accountsData[i+6] , data.clientsDataForBankAccounts[i+1], data.accountsData[i+7], data.amountsForTransaction[i]));
+            instance.addTransaction(data.clientsDataForBankAccounts[i], data.accountsData[i+6] , 
+                    data.clientsDataForBankAccounts[i+1], data.accountsData[i+7], data.amountsForTransaction[i]);
             Client clientFound = instance.searchClient(factory.createClient(data.clientsDataForBankAccounts[i]));
-            assertEquals(clientFound.getTransactios().get(i), data.transactions[i]);
+            assertEquals(clientFound.getTransactios().get(0), data.transactions[i]);    //każdy klient ma tylko jedną transakcję
         }
     }
 
